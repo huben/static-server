@@ -27,6 +27,6 @@ fn main() {
 		open::that(format!("http://{}:{}", args.host, args.port)).unwrap();
 	}
 
-	server::run(args.host.as_str(), args.port)
+	server::run(args.host.as_str(), args.port, args.root)
 	
 }

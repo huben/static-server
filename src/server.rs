@@ -1,7 +1,9 @@
 use std::net::SocketAddr;
 use std::str::FromStr;
+use std::sync::Arc;
 
 use axum::{
+  extract::Extension,
 	routing::{ get },
   Router,
 };
@@ -9,11 +11,11 @@ use axum::{
 use crate::handler;
 
 #[tokio::main]
-pub async fn run(host: &str, port: u16) {
+pub async fn run(host: &str, port: u16, root: String) {
   let app = Router::new()
-      .route("/healthz2", get(|| async { "ok" }))
       .route("/healthz", get(|| async { "ok" }))
-      .fallback(get(handler::fallback));
+      .fallback(get(handler::fallback))
+      .layer(Extension(Arc::new(root)));
   
   let ip_addr = std::net::IpAddr::from_str(host).unwrap_or_else(|_| "127.0.0.1".parse().unwrap());
   let addr = SocketAddr::from((ip_addr, port));
