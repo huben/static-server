@@ -12,6 +12,9 @@ open = "3.0.1"
 tokio = { version = "1.19.2", features = ["full"] }
 tower = "0.4.12"
 tower-http = { version = "0.3.4", features = ["fs"] }
-axum = "0.5.10"
+axum = { version = "0.5.10", features = ["ws", "headers"] }
 walkdir = "2"
 askama = "0.11.1"
+notify = "4.0.17"
+futures = "0.3"
+lazy_static = "1.4.0"
